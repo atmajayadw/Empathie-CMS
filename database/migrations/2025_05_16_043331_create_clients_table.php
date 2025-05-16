@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('client_id');
             $table->date('date');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
