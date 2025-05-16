@@ -21,6 +21,25 @@ class Client extends Model
         'client_id'
     ];
 
+    public function setNameAttribute($value){
+    $this->attributes['name'] = $value;
+    $this->attributes['client_id'] = Str::slug($value);
+    }
+
+    public function setCategoryNameAttribute($value){
+    $this->attributes['category_name'] = $value;
+    $client = $this->attributes['client_id'] ?? '';
+    $slugBase = trim($value . ' ' . $client);
+    $this->attributes['client_id'] = Str::slug($slugBase);
+    }
+
+    public function setDateAttribute($value){
+    $this->attributes['date'] = $value;
+    $client = $this->attributes['client_id'] ?? '';
+    $slugBase = trim($client . ' ' . $value);
+    $this->attributes['client_id'] = Str::slug($slugBase);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_name');
@@ -30,4 +49,5 @@ class Client extends Model
     {
         return $this->hasMany(Client::class);
     }
+
 }
