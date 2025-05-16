@@ -37,10 +37,16 @@ class ClientResource extends Resource
 
                 Forms\Components\FileUpload::make('thumbnail')
                 ->image()
+                ->directory('thumbnail')  
                 ->required(),
 
                 Forms\Components\DatePicker::make('date')
                 ->required(),
+
+                Forms\Components\FileUpload::make('photo')
+                ->multiple()               
+                ->directory('portofolio')  
+                ->required(),                
 
             ]);
     }

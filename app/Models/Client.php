@@ -18,7 +18,12 @@ class Client extends Model
         'category_name',
         'date',
         'thumbnail',
-        'client_id'
+        'client_id',
+        'photo'
+        ];
+
+        protected $casts = [
+        'photo' => 'array',
     ];
 
     public function setNameAttribute($value){

@@ -16,9 +16,13 @@ class Portfolio extends Model
         protected $fillable = [
         'client_id',
         'photo'
+        ];
+
+        protected $casts = [
+        'photo' => 'array',
     ];
 
-    public function client_id(): BelongsTo
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
