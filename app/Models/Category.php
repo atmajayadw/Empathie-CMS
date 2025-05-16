@@ -18,7 +18,7 @@ class Category extends Model
 
     public function client_list(): HasMany
     {
-        return $this->hasMany(Client::class);
+        return $this->hasMany(Client::class, 'category_name', 'category_name');
     }
 
     
