@@ -13,8 +13,13 @@ class Category extends Model
     use HasFactory, SoftDeletes;
     
         protected $fillable = [
-        'name',
+        'category_name',
     ];
+
+    public function client_list(): HasMany
+    {
+        return $this->hasMany(Client::class);
+    }
 
     
 }
