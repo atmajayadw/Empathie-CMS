@@ -14,6 +14,7 @@ class Category extends Model
     
         protected $fillable = [
         'category_name',
+        'thumbnail'
     ];
 
     public function client_list(): HasMany

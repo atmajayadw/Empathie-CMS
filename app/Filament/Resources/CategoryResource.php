@@ -29,6 +29,11 @@ class CategoryResource extends Resource
                 ->required()
                 ->maxLength(255),
 
+                Forms\Components\FileUpload::make('thumbnail')
+                ->image()
+                ->directory('thumbnail')  
+                ->required(),
+
             ]);
     }
 
@@ -38,6 +43,8 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('category_name')
                 ->searchable(),
+
+                Tables\Columns\ImageColumn::make('thumbnail'),
             ])
             ->filters([
                 //
