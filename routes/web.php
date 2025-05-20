@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,30 @@ Route::get('/api/test', function () {
     return response()->json(['message' => 'API jalan!']);
 });
 
+Route::get('/api/category', function () {
+    return response()->json(
+        Category::all()
+    );
+});
+
+Route::get('/api/category', function () {
+    $category = Category::all();
+
+    if ($category->isEmpty()) {
+        return response()->json([
+            'status' => false,
+            'message' => 'No category found.',
+            'data' => []
+        ], 404); 
+    }
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Category retrieved successfully.',
+        'data' => $category
+    ]);
+});
+
 Route::get('/api/clients/{category_name}', function ($category) {
     $clients = Client::where('category_name', $category)->get();
 
@@ -19,7 +44,7 @@ Route::get('/api/clients/{category_name}', function ($category) {
             'status' => false,
             'message' => 'No clients found in this category.',
             'data' => []
-        ], 404); // atau bisa 200 juga tergantung style kamu
+        ], 404); 
     }
 
     return response()->json([
@@ -27,12 +52,6 @@ Route::get('/api/clients/{category_name}', function ($category) {
         'message' => 'Clients retrieved successfully.',
         'data' => $clients
     ]);
-});
-
-Route::get('/api/clients/detail/{client_id}', function ($client_id) {
-    return response()->json(
-        Client::where('client_id', $client_id)->get()
-    );
 });
 
 
@@ -44,7 +63,7 @@ Route::get('/api/clients/detail/{client_id}', function ($client_id) {
             'status' => false,
             'message' => 'No clients found in this category.',
             'data' => []
-        ], 404); // atau bisa 200 juga tergantung style kamu
+        ], 404);
     }
 
     return response()->json([
