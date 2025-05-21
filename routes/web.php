@@ -37,7 +37,9 @@ Route::get('/api/category', function () {
 });
 
 Route::get('/api/clients/{category_name}', function ($category) {
-    $clients = Client::where('category_name', $category)->get();
+    $clients = Client::where('category_name', $category)
+    ->orderBy('date', 'desc')
+    ->get();
 
     if ($clients->isEmpty()) {
         return response()->json([
