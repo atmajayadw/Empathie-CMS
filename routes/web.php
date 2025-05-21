@@ -8,19 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api/test', function () {
-    return response()->json(['message' => 'API jalan!']);
-});
-
 Route::get('/api/category', function () {
-    return response()->json(
-        Category::all()
-    );
-});
-
-Route::get('/api/category', function () {
-    $category = Category::all();
-
+    $category = Category::orderBy('created_at', 'asc')->get();
     if ($category->isEmpty()) {
         return response()->json([
             'status' => false,
