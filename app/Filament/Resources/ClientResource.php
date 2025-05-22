@@ -14,6 +14,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Filters\SelectFilter;
 
 class ClientResource extends Resource
 {
@@ -46,6 +47,7 @@ class ClientResource extends Resource
                 Forms\Components\FileUpload::make('photo')
                 ->multiple()               
                 ->directory('portofolio')  
+                ->reorderable()
                 ->required(),                
 
             ]);
@@ -56,15 +58,23 @@ class ClientResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
 
-                Tables\Columns\TextColumn::make('category_name'),
+                Tables\Columns\TextColumn::make('category_name')
+                ->sortable(),
+
+                Tables\Columns\TextColumn::make('date')
+                ->sortable(),
 
                 Tables\Columns\ImageColumn::make('thumbnail'),
 
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make('category_name')
+                ->label('Filter by Category')
+                ->relationship('category', 'category_name')
             ])
             ->actions([
                 ActionGroup::make([

@@ -47,7 +47,7 @@ class Client extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'category_name');
+        return $this->belongsTo(Category::class, 'category_name', 'category_name');
     }
 
     public function data_list(): HasMany
